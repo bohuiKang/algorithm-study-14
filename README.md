@@ -19,7 +19,8 @@
 ### ✅ 문제 풀이
 - 월~일 매일 1문제 풀이
 - 폴더 이름: `aug_week1`, `aug_week2` 등 날짜 형식
-- 각자 자신의 폴더에 파일 업로드 (예: `aug_week1/boj_1000/user1.py`)
+- ~~각자 자신의 폴더에 파일 업로드 (예: `aug_week1/boj_1000/user1.py`)~~
+- 각자 자신의 폴더에 파일 업로드 (예: `aug_week1/user1/boj_1000.py`)
 - https://www.acmicpc.net/group/workbook/23989
 
 ### ✅ 코드 리뷰
@@ -59,7 +60,7 @@ git checkout -b bohui
 ### ✅ 문제 풀이 후
 - 변경사항 커밋
 ```bash
-git add aug_week1/boj_1000/bohui.py
+git add aug_week1/bohui/boj_1000.py
 git commit -m "bohui: BOJ 1000번 풀이 추가"
 ```
 - 원격 브랜치로 푸시

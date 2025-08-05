@@ -29,7 +29,7 @@ def scale(arr):
     if s == 7:
         return 'ascending'
     elif s == -7:
-        return ' descending'
+        return 'descending'
     else:
         return 'mixed'
 print(scale(arr))

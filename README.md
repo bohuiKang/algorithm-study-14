@@ -82,12 +82,6 @@ git push origin bohui
 - 코드 리뷰(코멘트) → 승인(Approve)
 - 문제 없으면 main 브랜치에 Merge
 - Merge 후 팀원들에게 main 최신화 안내
-```bash
-git checkout main
-git pull origin main
-git checkout bohui
-git merge main
-```
 
 ### ✅ 팀원들은 다음 작업 전에 항상 main 최신화
 - 새로운 작업 시작 전

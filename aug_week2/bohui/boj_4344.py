@@ -23,10 +23,12 @@ T = int(input())
 for tc in range(T):
     N, *n_scores = list(map(int, input().split()))
 
+    # 점수 합계
     score_sum = 0
     for score in n_scores:
         score_sum += score
 
+    # 평균을 넘는 학생 수
     score_average = score_sum / N
     above_average = 0
     for score in n_scores:

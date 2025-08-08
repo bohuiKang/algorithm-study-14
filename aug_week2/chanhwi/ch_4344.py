@@ -28,7 +28,7 @@
 C = int(input())
 for tc in range(1, C+1):
     score = list(map(float, input().split()))
-    N = score[0]
+    N = score[0]        # 두번째줄의 첫번째 input만 N에 할당 후 pop으로 score 리스트에서 제거
     score.pop(0)
     sm = 0
     good = 0

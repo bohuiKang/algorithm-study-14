@@ -22,12 +22,30 @@
 '''
 # 문제 이해가 안됨...
 
-N = int(input())
-minus = 0
-for i in range(N):
-    decrease = N-1-i
-    jumsu = int(input()) 
-    if jumsu - decrease:
-        jumsu - decrease
-        minus += decrease
-print(minus)
+# N = int(input())
+# minus = 0
+# for i in range(N):
+#     decrease = N-1-i
+#     jumsu = int(input()) 
+#     if jumsu - decrease:
+#         jumsu - decrease
+#         minus += decrease
+# print(minus)
+
+
+# 찬휘님의 설명 이후
+
+N = int(input())    # 레벨의 수
+level_jum = list(int(input()) for _ in range(N))    # 점수 리스트
+
+minus_cnt = 0   # 점수 차감 횟수 (-1 이 한번)
+for i in range(N-1, 0, -1): # 맨 뒤 레벨 점수부터 비교 => 인덱스 0번 제외(out of index 방지)
+    
+    if level_jum[i] <= level_jum[i-1]:  # 현재 레벨의 점수가 이전 레벨 점수보다 작거나 같으면
+        gap = level_jum[i-1] - level_jum[i] + 1 # 이전 점수를 현재 레벨과의 차이보다 한점 더 차감
+        
+        for _ in range(gap):   # minus_cnt 체크를 위해 for문 사용
+            level_jum[i-1] -= 1
+            minus_cnt += 1
+
+print(minus_cnt)

@@ -14,21 +14,34 @@ YNYNYNYNY
 
 출력: 모든 전구를 끄기 위해서 스위치를 몇 번 눌러야 하는지 출력한다. 만약, 모든 전구를 끌 수 없다면 -1을 출력한다.
 2
-
 '''
-switchs = list(input())
 
-cnt = 0
-for ss in range(len(switchs)):
+switchs = list(map(str, input()))
+
+cnt = 0 # 스위치를 누른 횟수 저장 변수
+N = len(switchs)    # 스위치(전구)의 개수
+for ss in range(N):
+
     if switchs[ss] == 'Y':
-        cnt += 1
-        if ss == 0:
-            switchs[ss] = 'N'
+        cnt += 1 # Y
+
+        # 인덱스 0번은 1번 스위치이다.
+        # 첫번째 스위치의 배수는 전체 스위치이다.
+        if switchs[ss] == 0:
+            for i in range(N):  # 처음부터 끝까지 변경
+                # Y => N, N => Y
+                if switchs[ss] == 'N':
+                    switchs[ss] = 'Y'
+                else:
+                    switchs[ss] = 'N'
+
+        # 인덱스 1번은 2번 스위치이다.
+        # 배수는 2,4,6,...
         else:
-            if (len(switchs)//ss + 1) < len(switchs):
-                for i in range(1, len(switchs)//ss + 1):
-                    switchs[ss * i] = 'N'
-            else: 
-                for i in range(1, len(switchs)//ss):
-                    switchs[ss * i] = 'N'
+            for i in range(ss, N, ss+1): # 현재 인덱스 부터 N-1까지 ss+1(배수) 간격으로 i를 지정
+                if switchs[i] == 'N':
+                    switchs[i] = 'Y'
+                else:
+                    switchs[i] = 'N'
+
 print(cnt)

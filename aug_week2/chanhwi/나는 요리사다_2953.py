@@ -25,5 +25,10 @@
 4 19
 '''
 max_v = 0
-for i in range(5):
-    temp_v = sum(list(map(int, input())))
+max_n = 0
+for i in range(1, 6):
+    arr = list(map(int, input().split()))
+    if max_v < sum(arr):
+        max_v = sum(arr)
+        max_n = i
+print(f"{max_n} {max_v}")

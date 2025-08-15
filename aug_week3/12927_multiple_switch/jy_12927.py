@@ -15,13 +15,15 @@ i번 스위치는 i의 배수 번호를 가지는 전구의 상태를 모두 반
 모든 전구를 끄기 위해서 스위치를 몇 번 눌러야 하는지 출력한다. 만약, 모든 전구를 끌 수 없다면 -1을 출력한다.
 '''
 
-def turnoff(n):
-    for i in range(len(n)):
-        if n[i] == "N"
-            for j in range(1, len(n)):
-                if i*j > n:
-                    break
-                else:
-                    n[i * j] = n[i * j] ^ 1
+def turnoff(bulbs):
+    count = 0
+    for i in range(len(bulbs)):
+        if bulbs[i] == 'Y':
+            count += 1
+            for idx in range(i, len(bulbs), i + 1):
+                bulbs[idx] = 'N' if bulbs[idx] == 'Y' else 'Y'
+    return count
 
-n = list(input())
+bulbs = list(input())
+result = turnoff(bulbs)
+print(result)

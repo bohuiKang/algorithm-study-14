@@ -16,17 +16,28 @@ idx 0 | 1 2 | 3 4 5 | 6 7 8 9 | 10 11 12 13 14 | 15
 max 1 | 2 2 | 3 3 3 | 4 4 4 4 | 5  5  5  5  5  | 6
 cha -1|-1 0 | 0 1 2 | 2 3 4 5 | 5  6  7  8  9  | 9
 '''
-1+2+3+4+5+6
+
+# 수열을 리스트에 담기
+sequence = [0] * 1000
+
+i = 0 # 인덱스 번호
+j = 1 # 수열 숫자
+while i < 1000: # i는 999까지
+    for _ in range(j):
+        sequence[i] = j
+        i += 1
+        if i >= 1000:
+            break
+    j += 1
+# print(sequence)
+
+
+# 리스트에서 구간의 합 구하기
 # A 시작 B 끝
 A, B = map(int, input().split())
 
-Interval_sum = 0
-check_num = 1
-for i in range(A): # 3 이면 0 1 2 3개
-    check_num += check_num + i
-# A의 값을 구하고
+interval_sum = 0
+for i in range(A-1, B): # 인덱스번호 = 순서-1
+    interval_sum += sequence[i]
 
-# for i in range(A-1, B):
-
-    
-
+print(interval_sum)

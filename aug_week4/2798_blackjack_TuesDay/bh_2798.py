@@ -24,11 +24,23 @@ N장의 카드에 써져 있는 숫자가 주어졌을 때, M을 넘지 않으�
 
 497
 '''
-N, M = input().split() # N: 카드의 개수, M: 딜러의 숫자
+N, M = map(int, input().split()) # N: 카드의 개수, M: 딜러의 숫자
 cards = list(map(int, input().split()))
 
-def backtrack(cards, n):
+# def backtrack(cards, n):
 
-    
+max_sum = 0
+for a in range(N-2):
+    card_sum = 0
+    card_sum += cards[a]
+    for b in range(a+1, N-1):
+        card_sum += cards[b]
+        for c in range(b+1, N):
+            card_sum += cards[c]
+            if M >= card_sum: # 딜러의 숫자보다 합계가 작을때, 
+                if max_sum < card_sum: # 그 값이 max 값보다 크면,
+                    max_sum = card_sum
+            card_sum -= cards[c] # 다음 c값을 위해 원상 복귀
+        card_sum -= cards[b]
 
-
+print(max_sum)

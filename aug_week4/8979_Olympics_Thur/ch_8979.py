@@ -62,10 +62,8 @@ for i in range(N - 1):
                     max_idx = j
     arr[max_idx], arr[i] = arr[i], arr[max_idx]
 
-print(arr)
-
 for idx in range(N - 1):
-    if arr[idx][1:] == arr[idx + 1][1:]:    # 앞국가와 뒷국가가 동점일때
+    if arr[idx][1:4] == arr[idx + 1][1:4]:    # 앞국가와 뒷국가가 동점일때
         if len(arr[idx]) == 4:  # 앞국가의 인덱스를 두 국가 모두에게 등수로 append
             arr[idx].append(idx); arr[idx + 1].append(idx)
         else:   # 앞 국가가 이미 등수가 있는 경우 뒷 국가에 앞 국가의 등수만 append

@@ -39,7 +39,7 @@ for medal in range(1, 4): # 금은동 확인 반복문
             grade += 1
             ex_nation += [i]
 
-        elif medal_GOD[medal][i] < medal_GOD[medal][nation]: 해당 국가 보다 메달수 작으면 이제 확인 필요 없음
+        elif medal_GOD[medal][i] < medal_GOD[medal][nation]: # 해당 국가 보다 메달수 작으면 이제 확인 필요 없음
             ex_nation += [i]
 
 print(grade)

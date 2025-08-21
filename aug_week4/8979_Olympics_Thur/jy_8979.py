@@ -21,35 +21,68 @@
 출력은 단 한 줄이며, 입력받은 국가 K의 등수를 하나의 정수로 출력한다. 등수는 반드시 문제에서 정의된 방식을 따라야 한다.
 '''
 #n = 국가의 수, m = 순위를 알아볼 국가의 인덱스
-n, m = map(int, input().split())
-medal_lst = [list(map(int, input().split())) for _ in range(n)]
+def find_ranking(arr, i, rank_num):
+    m = 0
+    same = []
 
-def find_ranking(lst, medal):
-    ranking = 1
-    max_gold = 0
-    same_gold = []
-    for i in range(n):
-        if medal_lst[i][medal] > max_gold:
-            max_gold = medal_lst[i][medal]
-            max_gold_idx = i
+    if len(medal_lst) == 0:
+        return rank
 
-    for i in range(n):
-        if medal_lst[i][medal] == max_gold:
-            same_gold.append([i, medal_lst[i][medal]])
+    for k in range(len(arr)):
+        if medal_lst[k][i] > m:
+            m = medal_lst[k][i] #지금 해당 메달(금/은/동)에서 가장 높은 메달 수
 
-    if max_gold == 0:
-        find_ranking(lst, medal + 1)
+    for kk in range(len(arr)):
+        if medal_lst[kk][i] == m:
+            same_max = arr[kk]
+            same_max_idx = kk
+            same.append(same_max) #같은거 저장
+
+    if len(same) == 1:
+        rank.append([same_max[0], rank_num]) #이렇게 되면 rank 내에서 i의 인덱스 번호 +1 = 순위가 되어 따로 지정할 필요 없음.. 아마?
+        medal_lst.pop(same_max_idx)
+        i = 1
+        rank_num += 1
+        find_ranking(medal_lst, i, rank_num)
 
     else:
+        if i == 3:
+            for j in range(len(same)):
+                rank.append([same_max[j][0], rank_num])
+            medal_lst.pop(same_max[0])
+            rank_num += 1
+            i = 1
+            find_ranking(same, i, rank_num)
+        else: #
+            find_ranking(same, i+1, rank_num)
 
-        if len(same_gold) == 1:
-            medal_lst[i].append(ranking)
-            medal_lst[i][medal] = 0
-            ranking += 1
-            find_ranking(lst, medal)
+n, m = map(int, input().split())
+medal_lst = [list(map(int, input().split())) for _ in range(n)]
+rank = []
 
-        else:
-            medal += 1
+rank_num = 1
+i = 1
 
-아 저 너무 힘들어요 진짜
+print(find_ranking(medal_lst, i, rank_num))
+
+여러분 죄송합니다 못 풀겠어요 ~!!!!
+졸업식 하고 나서 제대로 풀어보겠습니다 ~!!!!
+잘 지내세요 ~!!!!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

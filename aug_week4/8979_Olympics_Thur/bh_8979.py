@@ -31,6 +31,13 @@
 4 0 2 0
 2 0 2 0
 
+5 2
+1 0 3 2 3
+2 1 1 4 2
+5 0 3 2 3
+4 1 2 3 1
+3 0 3 0 5
+
 출력: 출력은 단 한 줄이며, 입력받은 국가 K의 등수를 하나의 정수로 출력한다. 
 등수는 반드시 문제에서 정의된 방식을 따라야 한다.
 2
@@ -43,9 +50,20 @@ olympics = [list(map(int, input().split())) for _ in range(N)]
 
 rank = [0] * N # 국가의 수만큼 등수를 받을 리스트 생성
 
-for i in range(N):
-    for j in range(1, N): # 금, 은, 동
+# for i in range(N):
+#     for j in range(1, N): # 금, 은, 동
+
+max_g = 0 # max 값의 인덱스 번호 저장
+min_g = 0 # min 값의 인덱스 번호 저장
+for g in range(N):
+    if olympics[max_g][1] < olympics[g][1]:
+        max_g = g
+    if olympics[min_g][1] > olympics[g][1]:
+        min_g = g
 
 
+print()
+for row in olympics:
+    print(*row)
 
 

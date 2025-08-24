@@ -19,6 +19,8 @@
 각 국가는 1부터 N 사이의 정수로 표현된다. 
 이후 N개의 각 줄에는 차례대로 각 국가를 나타내는 정수와 이 국가가 얻은 금, 은, 동메달의 수가 빈칸을 사이에 두고 주어진다. 
 전체 메달 수의 총합은 1,000,000 이하이다.
+# 국가번호 금 은 동
+
 4 3
 1 1 2 0
 2 0 1 0
@@ -26,44 +28,72 @@
 4 0 0 1
 
 4 2
-1 3 0 0 # 국가번호 금 은 동
+1 3 0 0
 3 0 0 2
 4 0 2 0
 2 0 2 0
 
 5 2
-1 0 3 2 3
-2 1 1 4 2
-5 0 3 2 3
-4 1 2 3 1
-3 0 3 0 5
+1 0 3 2 
+2 1 1 4 
+5 0 3 2 
+4 1 2 3 
+3 0 3 0 
+
+4 3
+1 3 1 4
+3 0 3 9
+4 3 1 4
+2 3 1 5
+
+2 2
+1 0 0 0
+2 0 0 0
+
+2 1
+1 1 1 2
+2 1 1 3
+
 
 출력: 출력은 단 한 줄이며, 입력받은 국가 K의 등수를 하나의 정수로 출력한다. 
 등수는 반드시 문제에서 정의된 방식을 따라야 한다.
-2
-
-2
 '''
-# N개의 국가, 등수를 알고 싶은 국가 K번
+# N개의 국가, 등수를 알고 싶은 국가 K번 => K
 N, K = map(int, input().split())
-olympics = [list(map(int, input().split())) for _ in range(N)]
+medals = [list(map(int, input().split())) for _ in range(N)]
 
-rank = [0] * N # 국가의 수만큼 등수를 받을 리스트 생성
+rank = 1 # K의 등수는 1등 부터 시작 => 나보다 메달을 더 가진 사람이 있는지?
 
-# for i in range(N):
-#     for j in range(1, N): # 금, 은, 동
+# find K idx
+me = 0
+for kk in range(N):
+    if medals[kk][0] == K:
+        me = kk
+        break
+# print('me: ', me)
 
-max_g = 0 # max 값의 인덱스 번호 저장
-min_g = 0 # min 값의 인덱스 번호 저장
-for g in range(N):
-    if olympics[max_g][1] < olympics[g][1]:
-        max_g = g
-    if olympics[min_g][1] > olympics[g][1]:
-        min_g = g
+for c in range(1, 4): # 메달 금은동을 바깥 for문으로 
 
+    for r in range(N): # 나라를 안쪽 for문으로
+        if me == r: # K의 인덱스와 r이 같으면 이번 for문 실행X
+            continue 
+        
+        if c == 1: # 금메달 비교
+            if medals[me][c] < medals[r][c]: # K의 me와 다른 나라와의 메달 비교
+                rank += 1 # 메달이 동점일 경우 등수 변동 x 
+                continue
 
-print()
-for row in olympics:
-    print(*row)
+        if c == 2: # 은메달 비교
+            if medals[me][1] == medals[r][1]: # 금메달의 개수가 같은 국가들의 은메달 개수를 비교
+                if medals[me][c] < medals[r][c]: 
+                    rank += 1 # 메달이 동점일 경우 등수 변동 x 
+                    continue
 
+        if c == 3: # 동메달 비교
+            # 금메달과 은메달의 개수가 같은 국가들의 동메달 개수를 비교
+            if (medals[me][1] == medals[r][1]) and (medals[me][2] == medals[r][2]): 
+                if medals[me][c] < medals[r][c]: 
+                    rank += 1 # 메달이 동점일 경우 등수 변동 x 
+                    continue
 
+print(rank) # K국가의 등수

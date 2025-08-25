@@ -32,25 +32,28 @@ S = int(input()) # 총 추천 횟수 = 추천한 학생의 수
 recommends = list(map(int, input().split())) # 추천받은 학생 번호 목록
 candidates = [0] * 101 # 추천받은 횟수를 기록할 리스트, 0번 인덱스는 사용안함
 
-N += 1 # queue를 사용하기 위해 한자리 늘림
-pictures = [0] * N # 후보자 사진틀
+pictures = [recommends[0]] # 후보자 사진틀, 첫번째 후보 미리 넣어놓기
+candidates[recommends[0]] += 1 # 첫번째 후보의 추천 횟수도 미리 누적
 front = rear = 0
 
-def enqueue():
-    pass
+for r in range(1, S):
+    if recommends[r] in pictures: # 추천받는자가 이미 후보자 사진틀에 등록되어 있음
+        candidates[recommends[r]] += 1 
+        continue
+    if len(pictures) != N: # 후보자 사진틀에 자리가 있으면
+        pictures.append(recommends[r])
+        candidates[recommends[r]] += 1 # 추천 적립
+    elif len(pictures) == N: # 사진틀이 꽉차면
+        min = 0
+        for i in range(1, N):
+            if candidates[pictures[min]] > candidates[pictures[i]]: # 추천수가 제일 작은 후보자 찾기 or 추천수 동일할때 제일 먼저 등록된 후보자 찾기
+                min = i
+        candidates[pictures[min]] = 0 # 추천수 0로
+        pictures.pop(min) # 탈락
+        # 사진틀에 자리남
+        pictures.append(recommends[r])
+        candidates[recommends[r]] += 1 # 추천 적립
 
-def dequeue():
-    pass
-
-def find_min():
-    pass
-    # 먼저 찾은 min이 오래된 후보자임?
-
-# 이거 왜 큐임??
-for r in range(S):
-    pass
-    
-
-
-
-
+pictures.sort()
+for p in pictures:
+    print(p, end=' ')

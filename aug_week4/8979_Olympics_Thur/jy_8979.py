@@ -1,55 +1,110 @@
-'''
-문제
-올림픽은 참가에 의의가 있기에 공식적으로는 국가간 순위를 정하지 않는다. 그러나, 많은 사람들이 자신의 국가가 얼마나 잘 하는지에 관심이 많기 때문에
-비공식적으로는 국가간 순위를 정하고 있다. 두 나라가 각각 얻은 금, 은, 동메달 수가 주어지면, 보통 다음 규칙을 따라 어느 나라가 더 잘했는지 결정한다.
-
-금메달 수가 더 많은 나라
-금메달 수가 같으면, 은메달 수가 더 많은 나라
-금, 은메달 수가 모두 같으면, 동메달 수가 더 많은 나라
-각 국가는 1부터 N 사이의 정수로 표현된다. 한 국가의 등수는 (자신보다 더 잘한 나라 수) + 1로 정의된다.
-만약 두 나라가 금, 은, 동메달 수가 모두 같다면 두 나라의 등수는 같다. 예를 들어, 1번 국가가 금메달 1개, 은메달 1개를 얻었고,
-2번 국가와 3번 국가가 모두 은메달 1개를 얻었으며, 4번 국가는 메달을 얻지 못하였다면, 1번 국가가 1등, 2번 국가와 3번 국가가 공동 2등, 4번 국가가 4등이 된다.
-이 경우 3등은 없다.
-
-각 국가의 금, 은, 동메달 정보를 입력받아서, 어느 국가가 몇 등을 했는지 알려주는 프로그램을 작성하시오.
-
-입력
-입력의 첫 줄은 국가의 수 N(1 ≤ N ≤ 1,000)과 등수를 알고 싶은 국가 K(1 ≤ K ≤ N)가 빈칸을 사이에 두고 주어진다. 각 국가는 1부터 N 사이의 정수로 표현된다.
-이후 N개의 각 줄에는 차례대로 각 국가를 나타내는 정수와 이 국가가 얻은 금, 은, 동메달의 수가 빈칸을 사이에 두고 주어진다. 전체 메달 수의 총합은 1,000,000 이하이다.
-
-출력
-출력은 단 한 줄이며, 입력받은 국가 K의 등수를 하나의 정수로 출력한다. 등수는 반드시 문제에서 정의된 방식을 따라야 한다.
-'''
 #n = 국가의 수, m = 순위를 알아볼 국가의 인덱스
+<<<<<<< HEAD
 n, m = map(int, input().split())
 medal_lst = [list(map(int, input().split())) for _ in range(n)]
+ranking = []
+medal = 1
 
-def find_ranking(lst, medal):
-    ranking = 1
-    max_gold = 0
-    same_gold = []
+def find_medal(medal_lst, medal):
+    rank = 1
+    max_medal = 0
+
+    if len(ranking) == n:
+        return
+
     for i in range(n):
-        if medal_lst[i][medal] > max_gold:
-            max_gold = medal_lst[i][medal]
-            max_gold_idx = i
+        if medal_lst[i][medal] < max_medal:
+            max_medal = medal_lst[i][medal]
+            max_medal_idx = i
 
-    for i in range(n):
-        if medal_lst[i][medal] == max_gold:
-            same_gold.append([i, medal_lst[i][medal]])
+    same = []
 
-    if max_gold == 0:
-        find_ranking(lst, medal + 1)
+    for j in range(n):
+        if medal_lst[j][1] == max_medal:
+            same.append(medal_lst[j])
+
+    if len(same) == 1:
+        ranking.append([rank] + medal_lst(max_medal_idx))
+        rank += 1
+        medal_lst.pop(i)
+        medal = 1
+        find_medal(medal_lst, medal)
 
     else:
+        if medal == 3:
+            for k in range(len(same)):
+                ranking.append([rank] + same[k])
+                medal_lst.pop(same[0])
+                medal = 1
+                find_medal(medal_lst, medal)
 
-        if len(same_gold) == 1:
-            medal_lst[i].append(ranking)
-            medal_lst[i][medal] = 0
-            ranking += 1
-            find_ranking(lst, medal)
+        medal += 1
+        find_medal(same, medal)
+=======
+def find_ranking(arr, i, rank_num):
+    m = 0
+    same = []
 
-        else:
-            medal += 1
+    if len(medal_lst) == 0:
+        return rank
 
-아 저 너무 힘들어요 진짜
+    for k in range(len(arr)):
+        if medal_lst[k][i] > m:
+            m = medal_lst[k][i] #지금 해당 메달(금/은/동)에서 가장 높은 메달 수
 
+    for kk in range(len(arr)):
+        if medal_lst[kk][i] == m:
+            same_max = arr[kk]
+            same_max_idx = kk
+            same.append(same_max) #같은거 저장
+
+    if len(same) == 1:
+        rank.append([same_max[0], rank_num]) #이렇게 되면 rank 내에서 i의 인덱스 번호 +1 = 순위가 되어 따로 지정할 필요 없음.. 아마?
+        medal_lst.pop(same_max_idx)
+        i = 1
+        rank_num += 1
+        find_ranking(medal_lst, i, rank_num)
+
+    else:
+        if i == 3:
+            for j in range(len(same)):
+                rank.append([same_max[j][0], rank_num])
+            medal_lst.pop(same_max[0])
+            rank_num += 1
+            i = 1
+            find_ranking(same, i, rank_num)
+        else: #
+            find_ranking(same, i+1, rank_num)
+
+n, m = map(int, input().split())
+medal_lst = [list(map(int, input().split())) for _ in range(n)]
+rank = []
+
+rank_num = 1
+i = 1
+
+print(find_ranking(medal_lst, i, rank_num))
+
+여러분 죄송합니다 못 풀겠어요 ~!!!!
+졸업식 하고 나서 제대로 풀어보겠습니다 ~!!!!
+잘 지내세요 ~!!!!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 9bf5c4bdb2024d863805fcbe3b5f4f70cf8330e5
+
+find_medal(medal_lst, medal)

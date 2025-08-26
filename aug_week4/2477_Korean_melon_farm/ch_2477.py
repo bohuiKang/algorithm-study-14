@@ -13,8 +13,8 @@ for _ in range(6):
     else:
         max_c = max(max_c, length)
 
-square *= 3
-for i in range(12):
+square *= 2
+for i in range(6):
     if (square[i] == max_r or square[i] == max_c) and (square[i+1] == max_r or square[i+1] == max_c):
         min_r = square[i+3]; min_c = square[i+4]
 area = max_r * max_c - min_r * min_c

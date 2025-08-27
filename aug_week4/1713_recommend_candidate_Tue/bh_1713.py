@@ -40,9 +40,11 @@ for r in range(1, S):
     if recommends[r] in pictures: # 추천받는자가 이미 후보자 사진틀에 등록되어 있음
         candidates[recommends[r]] += 1 
         continue
+
     if len(pictures) != N: # 후보자 사진틀에 자리가 있으면
         pictures.append(recommends[r])
         candidates[recommends[r]] += 1 # 추천 적립
+
     elif len(pictures) == N: # 사진틀이 꽉차면
         min = 0
         for i in range(1, N):
@@ -50,6 +52,7 @@ for r in range(1, S):
                 min = i
         candidates[pictures[min]] = 0 # 추천수 0로
         pictures.pop(min) # 탈락
+        
         # 사진틀에 자리남
         pictures.append(recommends[r])
         candidates[recommends[r]] += 1 # 추천 적립

@@ -81,10 +81,7 @@ for i in range(cuts):
 width_lst.sort()
 length_lst.sort()
 
-# print(width_lst)
-# print(length_lst)
-
-# 긴 종이 길이 찾기 => 실패
+# 긴 종이 길이 찾기
 long_width = 0
 start = 0
 for i in range(1, len(width_lst)):

@@ -1,5 +1,5 @@
 # N과 M (1)
-import sys; sys.stdin = open('156949_input.txt','r')
+import sys; sys.stdin = open('15649_input.txt', 'r')
 
 def recur(cnt):
     global path

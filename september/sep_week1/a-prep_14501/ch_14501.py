@@ -13,11 +13,11 @@ def recur(start, total):
     global max_v
     max_v = max(max_v, total)
 
-    for i in range(start, N + 1):
-        if i + arr[i][0] > N + 1:   # 시작일자 + 상담기간이 최대일자를 초과하면 선택 x
+    for day in range(start, N + 1):
+        if day + arr[day][0] > N + 1:   # 시작일자 + 상담기간이 최대일자를 초과하면 선택 x
             continue
         # 다음 시작일자 = 선택한 상담 일자 + 선택한 상담의 기간
-        recur(i + arr[i][0], total + arr[i][1])
+        recur(day + arr[day][0], total + arr[day][1])
 
 recur(1, 0)
 

@@ -13,7 +13,7 @@ def dfs(idx, p_sum): # idx는 앞에 상담일 끝난 다음날
         return
 
     for i in range(idx, N+1):
-        if i+T[i] < N+1:
+        if i+T[i] <= N+1:
             dfs(i+T[i], p_sum+P[i]) # i+T[i] 하면 상담 끝난 그 다음날 idx가 들어감
         else:
             dfs(i+T[i], p_sum) #  퇴직날 이후로 idx가 잡히게 되면 수익 더해주면 안됨

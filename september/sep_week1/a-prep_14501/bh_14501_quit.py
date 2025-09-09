@@ -1,5 +1,4 @@
 # 퇴사
-
 def plan(finish, earn):
     global max_earn
 
@@ -14,7 +13,7 @@ def plan(finish, earn):
             max_earn = earn
         return
 
-N = int(input()) # N일
+N = int(input()) # N일 근무
 
 work = [list(map(int, input().split())) for _ in range(N)] # 일거리
 

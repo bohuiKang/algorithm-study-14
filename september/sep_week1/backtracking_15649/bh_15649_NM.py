@@ -2,7 +2,7 @@
 import sys; sys.stdin = open('15649_input.txt', 'r')
 
 def recur(cnt):
-    global path
+    global path # 가변 객체는 글로벌 필요 없음
     global visited
 
     if cnt == M:

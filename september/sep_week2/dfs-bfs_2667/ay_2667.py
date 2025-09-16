@@ -9,10 +9,10 @@ visited = [[0]*N for _ in range(N)]
 
 def recur(r, c):
 
-    visited[r][c] = 1
+    visited[r][c] = 1 # 간적있는 장소 표시
     cnt = 1
 
-    for i in range(4):
+    for i in range(4): # 방향 확인
         nr = r + dr[i]
         nc = c + dc[i]
         if nr < 0 or nr >=N or nc < 0 or nc >=N:
@@ -28,7 +28,7 @@ def recur(r, c):
 numbers = []
 for r in range(N):
     for c in range(N):
-        if not visited[r][c] and apt_map[r][c] == "1":
+        if not visited[r][c] and apt_map[r][c] == "1": # 간적 없고, 단지에 도착하면
             numbers.append(recur(r, c))
 
 numbers.sort()

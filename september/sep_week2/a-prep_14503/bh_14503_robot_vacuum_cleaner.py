@@ -27,7 +27,6 @@ for tc in range(1, T+1):
             else: # 벽이 아니면
                 cleaning(nr, nc, way)
 
-
     N, M = map(int, input().split())
     i, j, d = map(int, input().split())
     room = [list(map(int, input().split())) for _ in range(N)]
@@ -39,4 +38,3 @@ for tc in range(1, T+1):
     cleaning(i, j, d) # 로봇의 위치, 바라보는 방향
 
     print(clean)
-

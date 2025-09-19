@@ -10,9 +10,6 @@ dc = [0, 1, 0, -1]
 address = 1
 house = []
 
-# for row in complex:
-#     print(*row)
-
 def check(sr, sc):
     global cnt
 
@@ -40,5 +37,3 @@ print(address-1)
 house.sort()
 for i in house:
     print(i)
-# for row in complex:
-#     print(*row)

@@ -1,15 +1,21 @@
-def check_distance(sr, sc, turn): # 치킨집 하나와 모든 집의 거리 합
-    global distance
-    for dr in range(N):
-        for dc in range(N):
-            if turn == 1: # 치킨 기준 집 찾기
-                if city[dr][dc] == 1:
-                    chicken[idx][1] += abs(sr - dr) + abs(sc - dc)
-            else: # 집 기준 치킨 찾기
-                if city[dr][dc] == 2:
-                    distance = min(distance, abs(sr - dr) + abs(sc - dc))
-                if distance == 1:
-                    return
+def chicken_distance(start, survive):
+    global answer
+
+    # 선택된 M개의 치킨집과 집들 사이의 최소 거리 확인
+    if len(survive) == M:
+        total_d = 0
+        for hr, hc in houses:
+            distance = float('inf')
+            for ckr, ckc in survive:
+                calc = abs(ckr - hr) + abs(ckc - hc)
+                distance = min(distance, calc)  # 집과 치킨의 최소 거리 선택
+            total_d += distance
+        answer = min(answer, total_d) # 도시의 치킨 거리가 제일 작은 값을 선택
+        return
+
+    # M 개만큼 치킨집을 선택
+    for i in range(start, len(chickens)):
+        chicken_distance(i+1, survive + [chickens[i]])
 
 
 N, M = map(int, input().split())
@@ -25,47 +31,13 @@ for r in range(N): # 치킨집을 기준으로 모든 집의 거리 합 저장
         elif city[r][c] == 2: # 치킨이면,
             chickens.append((r, c))
 
-'''
-def dfs(start, selected):
-    global ans
-
-    # M개의 치킨집을 다 골랐다면 도시 치킨 거리 계산
-    if len(selected) == M:
-        total = 0
-        for hr, hc in houses:
-            dist = 10**9
-            for cr, cc in selected:
-                dist = min(dist, abs(hr - cr) + abs(hc - cc))
-            total += dist
-        ans = min(ans, total)
-        return
-
-    # 아직 다 못 골랐다면 다음 치킨집 선택
-    for i in range(start, len(chickens)):
-        dfs(i + 1, selected + [chickens[i]])
-
-
-# 입력 처리
-N, M = map(int, input().split())
-city = [list(map(int, input().split())) for _ in range(N)]
-
-houses = []
-chickens = []
-for r in range(N):
-    for c in range(N):
-        if city[r][c] == 1:
-            houses.append((r, c))
-        elif city[r][c] == 2:
-            chickens.append((r, c))
-
-ans = float('inf')
-dfs(0, [])
-print(ans)
-'''
+answer = float('inf')
+chicken_distance(0, [])
+print(answer)
 
 
 
-## 논리적 오류
+## 문제를 잘 읽자
 # def check_distance(sr, sc, turn): # 치킨집 하나와 모든 집의 거리 합
 #     global distance
 #     for dr in range(N):

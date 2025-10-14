@@ -110,14 +110,14 @@ def bfs():
     # 익혀진 토마토의 상하좌우 탐색
     while q:
         tr, tc, day = q.popleft()
-        # 상하좌우 탐색시 안익혀진 토마토 탐색
+        # 안익혀진 토마토 탐색
         for i in range(4):
             nr, nc = tr+delta[i][0], tc+delta[i][1]
             if 0 <= nr < n and 0 <= nc < m:
-                # 안익혀진 토마토가 있는 경우 익히고
+                # 있는 경우 익히고
                 if lst[nr][nc] == 0:
                     lst[nr][nc] = 1
-                    # 해당 토마토를 익힌 토마토의 날짜 + 1 한 후 q에 삽입
+                    # 해당 토마토를 익힌 토마토의 날짜 + 1을 날짜로 할당, q에 삽입
                     q.append((nr, nc, day+1))
     # while이 종료된 후 day에는 맨 마지막 날이 할당되어있기에 현재 day = 최소 일수
     # 최소 일수 반환

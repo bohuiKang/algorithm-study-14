@@ -37,7 +37,6 @@ for r in range(N):
         if box[r][c] == 0:
             zero_tomato += 1
 
-
 bfs(queue)
 if zero_tomato: # 안익은 토마토가 있으면
     print(-1)

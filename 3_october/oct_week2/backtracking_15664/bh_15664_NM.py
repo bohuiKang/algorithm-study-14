@@ -14,3 +14,4 @@ arr = sorted(list(map(int, input().split())))
 paths = set()
 defdef(0, 0, []) # 시작 개수 수열
 
+# => set()으로 중복 검사 안해도 풀림.

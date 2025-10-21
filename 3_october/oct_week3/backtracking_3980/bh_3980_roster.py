@@ -6,7 +6,7 @@ def check_power(cnt, power):
         return
 
     for position in range(11):
-        if inform[cnt][position] == 0:
+        if inform[cnt][position] == 0: # 그 포지션에 갔을 때 메리트가 없는 선수라면 pass
             continue
         if not visited[position]: # 포지션에 누가 없으면
             visited[position] = 1

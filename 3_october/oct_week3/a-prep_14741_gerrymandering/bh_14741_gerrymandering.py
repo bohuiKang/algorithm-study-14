@@ -1,55 +1,53 @@
 from collections import deque
 
 def com(start, path_A, path_B, population):
-    global less_gap, check_split
+    global less_gap
 
-    # 인접한 구역인지 확인하기
-    if not check_adj(path_A, len(path_A)) and not check_adj(path_B, len(path_B)):
-        return  # 인접한 구역이 아님
+    if start == N:
+        if not path_A or not path_B:
+            return
 
-    # 위 코드를 통과하면 2구역 안의 선거구가 모두 인접한 구역임
-    if 0 < len(path_A) < N:
-        check_split = 0
-        less_gap = min(abs(total_people - population * 2), less_gap)
+        # 인접한 구역인지 확인하기
+        if not check_adj(path_A) or not check_adj(path_B):
+            return  # 인접한 구역이 아님
+
+        # 위 코드를 통과하면 2구역 안의 선거구가 모두 인접한 구역임
+        less_gap = min(less_gap, abs(population - (total_people - population)))
+        return
 
     # 구역 나누기
-    for area in range(start, N):
-        com(area+1, path_A+[area], path_B, population+people[area]) # 포함
-        com(area+1, path_A, path_B+[area], population) # 포함안함
+    # for area in range(start, N): => for 문 사용 안해도 됨
+    com(start+1, path_A+[start], path_B, population+people[start]) # 포함
+    com(start+1, path_A, path_B+[start], population) # 포함안함
 
 
-def check_adj(path, no): # 인접한 구역인지 확인하기
-    n = path[0]
-    q = deque(n)
-    visited = [0] * 6
-    visited[n] = 1
+def check_adj(path): # 인접한 구역인지 확인하기
+    q = deque([path[0]])
+    visited = {path[0]} # set
 
-    cnt = 1
     while q:
         s = q.popleft()
-        for i in range(adj_area[s][0]):
-            if adj_area[s][i+1]-1 in path:
-                if not visited[adj_area[s][i+1]-1]:
+        for nxt_area in adj_area[s][1:]:
+            nxt = nxt_area - 1
+            if nxt in path:
+                if nxt not in visited:
                     # 지나가지 않은 구역이라면
-                    cnt += 1
-                    q.append(adj_area[s][i+1]-1)
-    if cnt == no:
-        return True
-    else:
-        return False
+                    visited.add(nxt)
+                    q.append(nxt)
+
+    return len(visited) == len(path)
 
 
 N = int(input()) # N개의 구역
 people = list(map(int, input().split())) # 구역별 인구수
-adj_area = [list(map(int, input().split())) for _ in range(11)] # 인접 지역
+adj_area = [list(map(int, input().split())) for _ in range(N)] # 인접 지역
 
 total_people = sum(people)
 less_gap = float('inf')
-check_split = 1
 
 com(0, [], [], 0)
 
-if check_split:
+if less_gap == float('inf'):
     print(-1)
 else:
     print(less_gap)

@@ -58,7 +58,7 @@ from collections import deque
 import sys
 
 # 입력이 많을 수 있으므로 재귀 깊이를 설정
-# sys.setrecursionlimit(10**6) 
+# sys.setrecursionlimit(10**6)
 
 # N개의 구역, 인구수 배열 people, 인접 정보 adj_area (adjacency list)
 N = int(sys.stdin.readline())
@@ -81,17 +81,17 @@ def is_connected(path):
         return False # 구역이 하나도 없으면 연결될 수 없음
 
     start_node = path[0]
-    
+
     # 방문 여부 배열 초기화 (전체 N개 구역에 대해)
     visited = {node: False for node in path}
-    
+
     q = deque([start_node])
     visited[start_node] = True
     count = 1 # 탐색된 구역 수
 
     while q:
         curr = q.popleft()
-        
+
         # curr 구역과 인접한 모든 구역을 확인
         # adj_area에는 1-based index로 저장되어 있으므로 -1을 해줘야 함
         for neighbor in adj_area[curr]:
@@ -103,7 +103,7 @@ def is_connected(path):
                 visited[neighbor_idx] = True
                 q.append(neighbor_idx)
                 count += 1
-    
+
     # BFS로 탐색된 구역 수가 선거구의 전체 구역 수와 같으면 연결됨
     return count == len(path)
 
@@ -123,23 +123,23 @@ def find_subsets(idx, A_subset):
 
         # 1. 각 선거구가 최소 1개 이상의 구역을 포함하는지 확인
         if 0 < len(A) < N:
-            
+
             # 2. 두 선거구 A와 B 각각이 연결되어 있는지 확인
             if is_connected(A) and is_connected(B):
-                
+
                 # 3. 유효한 분할이므로 인구 차이 계산 및 갱신
                 pop_A = sum(people[i] for i in A)
-                # pop_B = total_people - pop_A 
-                
+                # pop_B = total_people - pop_A
+
                 # 인구 차이 계산 (pop_A - pop_B 의 절대값)
                 diff = abs(pop_A - (total_people - pop_A))
                 min_diff = min(min_diff, diff)
-        
+
         return
 
     # 재귀 호출 1: 현재 idx 구역을 선거구 A에 포함 (선택)
     find_subsets(idx + 1, A_subset + [idx])
-    
+
     # 재귀 호출 2: 현재 idx 구역을 선거구 B에 포함 (선택 안 함)
     find_subsets(idx + 1, A_subset)
 

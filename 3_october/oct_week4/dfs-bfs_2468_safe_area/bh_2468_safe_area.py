@@ -12,7 +12,7 @@ def rainy(sr, sc, water):
                 if area[dr][dc] > water and visited[dr][dc] == 0:
                     q.append((dr, dc))
                     visited[dr][dc] = 1
-    return 1
+    return 1 # 하나의 영역 리턴
 
 
 N = int(input())

@@ -4,9 +4,9 @@ from collections import deque
 
 drs =[(1, 0), (-1, 0), (0, -1), (0, 1)]
 
-def bfs(r, c):
+def bfs(r, c, check_arr):
     q = deque([(r,c)])
-    arr[r][c] = 3
+    check_arr[r][c] = 3
     while q:
         r, c = q.popleft()
         for dr, dc in drs:
@@ -14,7 +14,7 @@ def bfs(r, c):
             if nr < 0 or nr >= N or nc < 0 or nc >= M or arr[nr][nc]:
                 continue
             q.append((nr, nc))
-            arr[r][c] = 3
+            check_arr[r][c] = 3
 
 
 
@@ -34,7 +34,7 @@ def sellect_walls(sr, sc, cnt, walls):
         for r in range(N):
             for c in range(M):
                 if check_arr[r][c] == 2:
-                    bfs(r, c)
+                    bfs(r, c, check_arr)
 
         cnt = 0
         for r in range(N):

@@ -8,7 +8,7 @@ def bfs(lst):
 
     while q:
         m = q.popleft()
-        r, c = m // 5, m % 5
+        r, c = m // 5, m % 5 # r은 나머지, c는 몫
         for dr, dc in [(-1, 0), (0, 1), (1, 0), (0, -1)]:
             nr = r + dr
             nc = c + dc

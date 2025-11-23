@@ -2,9 +2,9 @@ N = int(input()) # NxN
 home = [list(map(int, input().split())) for _ in range(N)] # 빈칸 0, 벽 1
 
 # 가로, 대각선, 세로(이동 가능)
-position = [[True, True, False], [True, True, True], [False, True, True]]
-move = [(0, 1), (1, 1), (1, 0)] # 오른쪽, 대각선, 아래 이동 좌표 및 빈칸 확인
-add_check = [(0, 1), (1, 0)] # 대각선 추가 확인
+# position = [[True, True, False], [True, True, True], [False, True, True]]
+# move = [(0, 1), (1, 1), (1, 0)] # 오른쪽, 대각선, 아래 이동 좌표 및 빈칸 확인
+# add_check = [(0, 1), (1, 0)] # 대각선 추가 확인
 dp_visited = [[[0] * 3 for _ in range(N)] for _ in range(N)] # [r][c][방향]
 dp_visited[0][1][0] = 1 # 출발 시점
 
@@ -34,8 +34,6 @@ for r in range(N):
 
 # 3 방향 전체 도착 건수 합산
 print(dp_visited[N-1][N-1][0]+dp_visited[N-1][N-1][1]+dp_visited[N-1][N-1][2])
-
-
 
 
 ## 시간초과 :)

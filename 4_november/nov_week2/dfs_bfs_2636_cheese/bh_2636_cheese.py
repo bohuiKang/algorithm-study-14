@@ -19,7 +19,7 @@ def find_air(r, c): # 치즈를 녹이는 공기를 체크
 def melting(cheese_list): # 공기와 맞닿은 치즈 녹이기
     for r, c in cheese_list:
         cheeses[r][c] = 0
-        visited[r][c] = True
+        # visited[r][c] = True
 
 N, M = map(int, input().split())
 cheeses = [list(map(int, input().split())) for _ in range(N)]

@@ -72,7 +72,7 @@ def move_en(enemy_list):
     remove_list = deque([])
     for i in range(enemy_num):
         r, c = enemy_list[i]
-        grid[r][c] = 0
+        grid_copy[r][c] = 0
         enemy_list[i] = (r+1, c)
         if r+1 == N:
             remove_list.append((r+1, c))
@@ -81,7 +81,7 @@ def move_en(enemy_list):
         rc = remove_list.pop()
         enemy_list.remove(rc)
     for r, c in enemy_list:
-        grid[r][c] = 1
+        grid_copy[r][c] = 1
 
     return enemy_list
 
